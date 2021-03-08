@@ -8,8 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
+<?import java.net.URL?>
 <VBox fx:controller="client.Controller"
       xmlns:fx="http://javafx.com/fxml" alignment="center" >
+
+    <stylesheets>
+        <URL value="@/style/styles.css" />
+    </stylesheets>
 
     <HBox fx:id = "authPanel" visible="true" managed="true">
         <TextField fx:id = "loginField" promptText="login" HBox.hgrow="ALWAYS"/>

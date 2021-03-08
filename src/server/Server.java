@@ -46,9 +46,10 @@ public class Server{
         if(isForMultipleUsers){
             String user1 = str.split(" ")[0];
             String user2 = str.split(" ")[1];
-            String message = str.split(" ")[2];
+            String msg = str.split(" ")[2];
             for (ClientHandler client : clients) {
-                if(client.getNickName().equals(user1)){
+                if(client.getNickName().equals(user1) || client.getNickName().equals(user2)) {
+                    String message = String.format("%s : %s", client.getNickName(), msg);
                     client.sendMsg(message);
                 }
             }

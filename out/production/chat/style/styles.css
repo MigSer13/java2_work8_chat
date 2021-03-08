@@ -1,0 +1,19 @@
+.root{
+        -fx-font-weigt: regular;
+        -fx-font-family: "Tahoma";
+        }
+
+        #textArea{
+        -fx-control-inner-background: #E0FFFF;
+        -fx-font-size: 18;
+        }
+
+        #textField{
+        -fx-control-inner-background: #90EE90;
+        -fx-font-size: 12;
+        }
+
+        #send{
+        -fx-background-color: gray;
+        -fx-text-fill: white;
+        }
