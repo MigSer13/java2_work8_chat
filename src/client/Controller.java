@@ -36,7 +36,6 @@ public class Controller implements Initializable {
     private final String IP_ADDRESS = "localhost";
     private final int PORT = 8189;
 
-
     private Socket socket;
     DataInputStream in;
     DataOutputStream out;
@@ -80,7 +79,7 @@ public class Controller implements Initializable {
         }
         try {
             out.writeUTF(String.format("/auth %s %s", loginField.getText().trim().toLowerCase(),
-                    passwordField.getText().trim()));
+            passwordField.getText().trim()));
             passwordField.clear();
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,6 +106,9 @@ public class Controller implements Initializable {
                                 break;
                             }
                             textArea.appendText(str + "\n");
+                        }
+                        if(!textArea.getText().equals("")){
+                            textArea.clear();
                         }
 
                         // цикл работы
