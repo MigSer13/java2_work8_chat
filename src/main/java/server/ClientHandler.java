@@ -25,20 +25,29 @@ public class ClientHandler {
 
             new Thread(() -> {
                 try {
-//                    socket.setSoTimeout(5000);
-//                    socket.setSoTimeout(0);
                     // цикл аутентифиукаии
                     socket.setSoTimeout(10000); //10 секунд
                     while (true) {
                         String str = in.readUTF();
                         if (str.startsWith("/auth")) {
                             String[] token = str.split("\\s");
+                            String login = token[1];
+                            String password = token[2];
                             if (token.length <3){
                                 continue;
                             }
-                            String newNick = server.getAuthService()
-                                    .getNickByLoginAndPassword(token[1], token[2]);
-                            login = token[1];
+//                            String newNick = server.getAuthService().getNickByLoginAndPassword(login, password);
+                            String answer = server.findUserInDatabase(login, password);
+                            String newNick = null;
+                            if(answer.startsWith("/authok")){
+                               newNick = answer.split("\\s")[1];
+                               this.login = login;
+                            } else if(answer.startsWith("/userNotFound")){
+                                sendMsg(answer.split("\\s")[1]);
+                            }
+                            else {
+                                sendMsg(answer);
+                            }
                             if (newNick != null) {
                                 if (!server.isLoginAuthenticated(login)) {
                                     nickName = newNick;
@@ -59,8 +68,11 @@ public class ClientHandler {
                             if(token.length < 4){
                                 continue;
                             }
-                            boolean isRegistration = server.getAuthService()
-                                    .registration(token[1], token[2], token[3]);
+                            String login = token[1];
+                            String password = token[2];
+                            String nickname = token[3];
+                            //boolean isRegistration = server.getAuthService().registration(login, password, nickname);
+                            boolean isRegistration = server.iSregistrationUser(login, password, nickname);
                             if (isRegistration){
                                 sendMsg("/regok");
                             }else {
