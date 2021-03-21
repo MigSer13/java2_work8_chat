@@ -3,6 +3,8 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,20 +12,24 @@ import java.util.Vector;
 
 public class Server{
     SimpleDateFormat formater = new SimpleDateFormat("HH:mm:ss");
-    List<ClientHandler> clients;
-    private AuthService authService;
+    //List<ClientHandler> clients;
+    //private AuthService authService;
 
     private static int PORT = 8189;
     ServerSocket server = null;
     Socket socket = null;
+    private Connection connection;
+    private Statement statement;
 
     public Server() {
-        clients = new Vector<>();
-        authService = new SimpleAuthService();
+        //clients = new Vector<>();
+        //authService = new SimpleAuthService();
+
 
         try {
             server = new ServerSocket(PORT);
             System.out.println("Сервер запущен");
+
 
             while (true) {
                 socket = server.accept();
