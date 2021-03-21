@@ -12,6 +12,7 @@
             <version>3.32.3.3</version>
         </dependency>
 
+        <!--вопрос как подключить JavaFX? -->
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
         <dependency>
             <groupId>org.openjfx</groupId>
