@@ -41,7 +41,8 @@ public class Server {
         } finally {
             try {
                 server.close();
-            } catch (IOException e) {
+                connection.close();
+            } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
         }
