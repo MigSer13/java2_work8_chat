@@ -143,10 +143,19 @@ public class Server {
         return false;
     }
 
+    public boolean renameNick(String login, String newNick){
+        try {
+            return statement.execute("UPDATE users SET nick = "+ newNick +"  FROM users WHERE login = " + login);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     private void connect() throws SQLException, ClassNotFoundException
     {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:dataDB.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
             statement = connection.createStatement();
     }
 

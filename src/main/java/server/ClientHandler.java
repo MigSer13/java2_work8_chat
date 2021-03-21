@@ -79,6 +79,7 @@ public class ClientHandler {
                                 sendMsg("/regno");
                             }
                         }
+
                     }
 
                     socket.setSoTimeout(0);
@@ -99,7 +100,17 @@ public class ClientHandler {
                                 }
                                 server.privateMsg(this, token[1], token[2]);
                             }
-                        } else {
+                        } else if(str.startsWith("/rename")){
+                            String[] token = str.split("\\s");
+                            if(token.length < 2){
+                                continue;
+                            }
+                            String newNick = token[1];
+                            if (server.renameNick(this.login, newNick)){
+                                sendMsg("ник поменян на " + newNick);
+                                this.nickName = newNick;
+                            }
+                        }else {
                             server.broadcastMsg(this, str);
                         }
                     }
